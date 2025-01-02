@@ -26,7 +26,8 @@
             border-radius: 12px;
             padding: 16px 32px 16px 32px;
         }
-        .btn-common:hover{
+
+        .btn-common:hover {
             background-color: #a5cacb;
             border: solid 1px black;
         }
@@ -70,13 +71,15 @@
                 committed to providing excellent service to its customers when it comes to the health care of their
                 Pets.It is a long established <span class="hidden">fact that a reader will be distracted by the readable
                     content of a page when looking at its layout.</span></p>
-            <button class="btn-common my-5">View More</button>
+            <a href="#main-section">
+                <button class="btn-common my-5">View More</button>
 
+            </a>
             <img src="./images/pet.webp" alt="">
         </div>
     </header>
 
-    <main class="w-10/12 mx-auto lg:w[740px]">
+    <main id="main-section" class=" w-10/12 mx-auto lg:w[740px]">
         <div class="text-center  py-9">
             <h2 class="text-3xl font-extrabold font py-3">Adopt Your Best Friend</h2>
             <p>We are more than just a store; we are a community of pet lovers who understand the joy and companionship
@@ -84,14 +87,27 @@
                 the highest quality products that reflect our commitment to excellence.</p>
         </div>
 
-        <div id="category-btn" class="w-10/12 mx-auto flex flex-col items-center gap-4 lg:flex-row justify-between my-8 font">
+        <div id="category-btn"
+            class="w-10/12 mx-auto flex flex-col items-center gap-4 lg:flex-row justify-between my-8 font">
         </div>
 
         <!-- sort sec -->
-         <div class="w-10/12 my-9 flex flex-col lg:flex-row gap-2 justify-between items-center mx-auto">
+        <div class="w-10/12 my-9 flex flex-col lg:flex-row gap-2 justify-between items-center mx-auto">
             <h2 class="font text-xl font-bold my-3">Best Deal For you</h2>
             <button class="btn-common font">Sort by</button>
-         </div>
+        </div>
+
+        <!-- grid area -->
+        <div class="min-w-full border border-red-100 my-10">
+            <div id="showPets" class="grid grid-cols-1 lg:grid-cols-4 w-full gap-5 ">
+
+        <div class="grid lg:grid-cols-1 row-span-4 border border-green-800"></div>
+                
+            </div>
+
+            
+        </div>
+
     </main>
 
     <script src="./index.js"></script>
