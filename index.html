@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peddy</title>
+
+    <!-- daisy -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+        .font {
+            font-family: "Lato", serif;
+        }
+
+        .btn-common {
+            background-color: #0E7A81;
+            color: white;
+            border-radius: 12px;
+            padding: 16px 32px 16px 32px;
+        }
+        .btn-common:hover{
+            background-color: #a5cacb;
+            border: solid 1px black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- header section -->
+    <header>
+        <nav class="px-9 py-8 flex flex-col items-center gap-3 lg:flex-row lg:justify-around">
+            <div class="flex gap-2">
+                <img src="./images/logo.webp" alt="">
+                <h1 class="text-2xl font-bold font">Peddy</h1>
+            </div>
+            <div>
+                <ul class="flex gap-3 font">
+                    <li><a>Home</a></li>
+                    <li><a>Shop</a></li>
+                    <li><a>Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+            </div>
+        </nav>
+
+        <!-- banner section -->
+
+        <div class="text-center w-10/12 lg:w-[800px] mx-auto pt-9">
+            <h2 class="flex justify-center items-center">Bringing Families Together
+                <span class="">
+                    <img class="w-6 h-6" src="./images/icons8-fire-16.png" alt="">
+                </span>
+            </h2>
+            <h1 class="text-3xl lg:text-7xl font-extrabold font py-5">Your Path to Adoption <br> Starts Here</h1>
+            <p class="text-sm lg:text-lg">It is a one-roof solution for all the needs and wishes of pets and is
+                committed to providing excellent service to its customers when it comes to the health care of their
+                Pets.It is a long established <span class="hidden">fact that a reader will be distracted by the readable
+                    content of a page when looking at its layout.</span></p>
+            <button class="btn-common my-5">View More</button>
+
+            <img src="./images/pet.webp" alt="">
+        </div>
+    </header>
+
+    <main class="w-10/12 mx-auto lg:w[740px]">
+        <div class="text-center  py-9">
+            <h2 class="text-3xl font-extrabold font py-3">Adopt Your Best Friend</h2>
+            <p>We are more than just a store; we are a community of pet lovers who understand the joy and companionship
+                that our furry friends bring into our lives. Join us on this exciting journey as we strive to provide
+                the highest quality products that reflect our commitment to excellence.</p>
+        </div>
+
+        <div id="category-btn" class="w-10/12 mx-auto flex flex-col items-center gap-4 lg:flex-row justify-between my-8 font">
+        </div>
+
+        <!-- sort sec -->
+         <div class="w-10/12 my-9 flex flex-col lg:flex-row gap-2 justify-between items-center mx-auto">
+            <h2 class="font text-xl font-bold my-3">Best Deal For you</h2>
+            <button class="btn-common font">Sort by</button>
+         </div>
+    </main>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
