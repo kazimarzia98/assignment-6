@@ -15,7 +15,7 @@ const displayCategories = (categories) => {
         const button = document.createElement("button");
         button.innerHTML = `
         <div>
-        <button class ='border border-1 rounded-xl px-7 py-3 flex gap-2 hover:text-white hover:bg-[#0E7A81]'>
+        <button id="btn-${item.id}" onclick = loadActiveBtn(${item.id}) class ='category-btn border border-1 rounded-xl px-7 py-3 flex gap-2 hover:text-white hover:bg-[#0E7A81]'>
         <img class = 'w-6 h-6' src ='${item.category_icon}' alt ='' >
         ${item.category}</button>
         </div>
@@ -25,6 +25,32 @@ const displayCategories = (categories) => {
         categoryBtn.appendChild(button);
     })
 };
+
+// active button
+
+const loadActiveBtn = (id) => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
+        .then(res => res.json())
+        .then(data => showActiveBtn(data.petData))
+        .catch((error) => console.log(error));
+}
+const showActiveBtn = (petData) =>{
+    // console.log(petData.petId);
+    const petId = petData.petId;
+    removeActiveClass();
+
+    const activeBtn = document.getElementById(`btn-${petId}`);
+    activeBtn.classList.add("active");
+    // console.log(activeBtn);
+}
+
+const removeActiveClass = () =>{
+   const buttons = document.getElementsByClassName("category-btn");
+//    console.log(buttons);
+   for(let btn of buttons){
+    btn.classList.remove("active")
+   }
+}
 
 // show category pets after clicking button
 
@@ -50,7 +76,7 @@ const displayCategoryPets = (pets) => {
         </div>
         `;
         return;
-    }else{
+    } else {
         showPets.classList.add("grid");
     }
 
@@ -94,13 +120,13 @@ const displayCategoryPets = (pets) => {
            <div class="divider"></div>
 
         <div class="card-actions justify-around">
-        <button onclick = loadAddedPets(${pet.image}) class="btn btn-active">
+        <button  onclick = loadPetsInSideBar(${pet.petId}) class="btn btn-active">
                 <span >
                     <img class="w-5 h-5" src="./images/thumbs-up.png" alt="">
                 </span>
         </button>
         <button class="btn btn-active text-[#0E7A81]">Adopt</button>
-        <button class="btn btn-active text-[#0E7A81]">Details</button>
+        <button onclick = loadModal(${pet.petId}) class="btn btn-active text-[#0E7A81]">Details</button>
         </div>
         </div>
         </div>
@@ -168,7 +194,7 @@ const displayPets = (pets) => {
                 </span>
         </button>
         <button class="btn btn-active text-[#0E7A81]">Adopt</button>
-        <button onclick = "loadModal(${pet.petId})"  class="btn btn-active text-[#0E7A81]">Details</button>
+        <button onclick = loadModal(${pet.petId}) class="btn btn-active text-[#0E7A81]">Details</button>
         </div>
         </div>
         </div>
@@ -190,7 +216,6 @@ const loadModal = (id) => {
 }
 
 const displayModal = (petData) => {
-    console.log(petData);
 
     const modalContainer = document.getElementById("modal-content");
     modalContainer.innerHTML =
@@ -245,7 +270,7 @@ const displayModal = (petData) => {
     document.getElementById("showModalDetails").click();
 }
 
-// load pet images for side bar side bar 
+// load pet images for side bar
 
 const loadPetsInSideBar = (id) => {
     fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
@@ -263,7 +288,7 @@ const displayPetsInSideBar = (petData) => {
     const newCard = document.createElement('div');
     newCard.innerHTML =
         `
-    <div class = 'border border-slate-300 py-2 px-2'>
+    <div class = 'border border-slate-300 py-2 px-2 '>
      <img class = 'w-[270px] h-[160px]' src = '${petData.image}'>
     </div>
     `;
