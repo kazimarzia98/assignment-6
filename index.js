@@ -26,7 +26,7 @@ const displayCategories = (categories) => {
     })
 };
 
-// active button
+//show active button
 
 const loadActiveBtn = (id) => {
     fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
@@ -34,7 +34,7 @@ const loadActiveBtn = (id) => {
         .then(data => showActiveBtn(data.petData))
         .catch((error) => console.log(error));
 }
-const showActiveBtn = (petData) =>{
+const showActiveBtn = (petData) => {
     // console.log(petData.petId);
     const petId = petData.petId;
     removeActiveClass();
@@ -44,21 +44,34 @@ const showActiveBtn = (petData) =>{
     // console.log(activeBtn);
 }
 
-const removeActiveClass = () =>{
-   const buttons = document.getElementsByClassName("category-btn");
-//    console.log(buttons);
-   for(let btn of buttons){
-    btn.classList.remove("active")
-   }
+const removeActiveClass = () => {
+    const buttons = document.getElementsByClassName("category-btn");
+    //    console.log(buttons);
+    for (let btn of buttons) {
+        btn.classList.remove("active")
+    }
 }
 
 // show category pets after clicking button
 
 const loadCategoryPets = (category) => {
-    fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
-        .then(res => res.json())
-        .then(data => displayCategoryPets(data.data))
-        .catch((error) => console.log(error));
+    const spinner = document.getElementById("spinner");
+    const showPets = document.getElementById("showPets");
+
+    spinner.classList.remove("hidden");
+    showPets.classList.add("hidden");
+
+    setTimeout(() => {
+        fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+            .then(res => res.json())
+            .then(data => {
+                displayCategoryPets(data.data);
+
+                spinner.classList.add("hidden");
+                showPets.classList.remove("hidden");
+            })
+            .catch((error) => console.log(error));
+    }, 2000)
 };
 
 const displayCategoryPets = (pets) => {
@@ -125,7 +138,7 @@ const displayCategoryPets = (pets) => {
                     <img class="w-5 h-5" src="./images/thumbs-up.png" alt="">
                 </span>
         </button>
-        <button class="btn btn-active text-[#0E7A81]">Adopt</button>
+        <button onclick =loadAdoptModal(${pet.petId}) class="btn btn-active text-[#0E7A81]">Adopt</button>
         <button onclick = loadModal(${pet.petId}) class="btn btn-active text-[#0E7A81]">Details</button>
         </div>
         </div>
@@ -137,13 +150,27 @@ const displayCategoryPets = (pets) => {
 }
 
 
+
 // show all pets in card
 
 const loadPets = () => {
-    fetch("https://openapi.programming-hero.com/api/peddy/pets")
-        .then(res => res.json())
-        .then(data => displayPets(data.pets))
-        .catch((error) => console.log(error))
+    const spinner = document.getElementById("spinner");
+    const showPets = document.getElementById("showPets");
+
+    spinner.classList.remove("hidden");
+    showPets.classList.add("hidden");
+
+    setTimeout(() => {
+        fetch("https://openapi.programming-hero.com/api/peddy/pets")
+            .then(res => res.json())
+            .then(data => {
+                displayPets(data.pets);
+
+                spinner.classList.add("hidden");
+                showPets.classList.remove("hidden")
+            })
+            .catch((error) => console.log(error))
+    }, 2000)
 };
 
 const displayPets = (pets) => {
@@ -193,7 +220,7 @@ const displayPets = (pets) => {
                     <img class="w-5 h-5" src="./images/thumbs-up.png" alt="">
                 </span>
         </button>
-        <button class="btn btn-active text-[#0E7A81]">Adopt</button>
+        <button onclick =loadAdoptModal(${pet.petId}) class="btn btn-active text-[#0E7A81]">Adopt</button>
         <button onclick = loadModal(${pet.petId}) class="btn btn-active text-[#0E7A81]">Details</button>
         </div>
         </div>
@@ -268,6 +295,37 @@ const displayModal = (petData) => {
     
     `
     document.getElementById("showModalDetails").click();
+}
+
+// modal for adopt button
+const loadAdoptModal = (id) => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
+        .then(res => res.json())
+        .then(data => displayAdoptModal(data.petData))
+        .catch((error) => console.log(error))
+}
+
+const displayAdoptModal = (petData) => {
+    const modalContainer = document.getElementById("modal-content");
+    let count = 0;
+    let intervalID = setInterval(() => {
+        console.log(`Count: ${++count}`);
+        if (count === 5) {
+            clearInterval(intervalID);
+            console.log("Interval cleared!");
+        }
+    }, 1000);
+    modalContainer.innerHTML = `
+    <h2>Congratulations for ${petData.pet_name}</h2>
+
+    
+    
+    `
+
+    document.getElementById("showAdoptModal").click();
+
+
+
 }
 
 // load pet images for side bar
